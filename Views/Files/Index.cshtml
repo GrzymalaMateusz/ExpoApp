@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Inzynierka.Models.Files>
+
+@{
+    ViewBag.Title = "Pliki";
+}
+
+<h2>Pliki</h2>
+
+<p>
+    @Html.ActionLink("Dodaj Plik", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.File)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="~/Images/Company/Files/@item.File">@item.Name</a>
+        </td>
+        <td>
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

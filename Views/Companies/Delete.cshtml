@@ -1,0 +1,216 @@
+﻿@model Inzynierka.Models.Company
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Czy na pewno chcesz usunąć tego użytkownika?</h3>
+<div>
+    <h4>Wystawca</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyAbout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyAbout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductsAbout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductsAbout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyLogo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyLogo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StandPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Facebook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Facebook)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instagram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instagram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Snapchat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Snapchat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Youtube)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Youtube)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.www)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.www)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForName_And_SurName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForName_And_SurName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trade)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Wróć do listy", "Index")
+        </div>
+    }
+</div>

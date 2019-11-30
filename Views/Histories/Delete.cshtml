@@ -1,0 +1,39 @@
+﻿@model Inzynierka.Models.History
+
+@{
+    ViewBag.Title = "Usuń";
+}
+
+<h2>Usuwanie</h2>
+
+<h3>Czy na pewno chcesz usunąć to wyszukiwanie?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Search)
+        </dt>
+
+        <dd>
+            @Html.Raw(@Model.Search)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Wróć do listy", "List",new { id=Model.Expo.Id})
+        </div>
+    }
+</div>

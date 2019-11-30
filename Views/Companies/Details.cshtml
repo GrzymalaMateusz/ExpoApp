@@ -1,0 +1,187 @@
+﻿@model Inzynierka.Models.Company
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <img src="~/Images/Company/@Model.CompanyLogo" alt="" style="border-radius:5px 5px;min-height:88px;max-width:160px;max-height:88px;width:100%;height:100%;" />
+        </dt>
+
+        <dd>
+            <div style="float:left;width:85%">
+                <h1>@Model.CompanyName</h1>
+            </div>
+
+            <div style="float:right;width:15%;">
+                <div style="float:left;width:48%">
+                    <a href="@Model.Facebook"><img src="~/Images/fb.png" alt="" style="width:100%;height:100%;" /></a>
+                </div>
+                <div style="float:right;width:48%;margin-left:4%">
+                    <a href="@Model.Instagram"><img src="~/Images/instagram.svg" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+            </div>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyFullName)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyAbout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyAbout)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductsAbout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductsAbout)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Youtube)
+        </dt>
+
+        <dd>
+            <iframe style="max-width:560px;width:100%;height:315px;" src="https://www.youtube.com/embed/@Model.Youtube" frameborder="0" allowfullscreen></iframe>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo1)
+        </dt>
+
+        <dd>
+            <div class="row">
+                <div style="width:15%;float:left;margin-left:1%">
+                    <a href="~/Images/Company/@Model.StandPhoto"><img src="~/Images/Company/@Model.StandPhoto" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+                <div style="width:15%;float:left;margin-left:1%">
+                    <a href="~/Images/Company/@Model.Photo1"><img src="~/Images/Company/@Model.Photo1" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+                <div style="width:15%;float:left;margin-left:1%">
+                    <a href="~/Images/Company/@Model.Photo2"><img src="~/Images/Company/@Model.Photo2" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+                <div style="width:15%;float:left;margin-left:1%">
+                    <a href="~/Images/Company/@Model.Photo3"><img src="~/Images/Company/@Model.Photo3" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+                <div style="width:15%;float:left;margin-left:1%">
+                    <a href="~/Images/Company/@Model.Photo4"><img src="~/Images/Company/@Model.Photo4" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+                <div style="width:15%;float:left;margin-left:1%">
+                    <a href="~/Images/Company/@Model.Photo5"><img src="~/Images/Company/@Model.Photo5" alt="" height="100%" width="100%" style="border-radius:5px 5px;" /></a>
+                </div>
+            </div>
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adress)
+            <iframe width="100%"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCUrBG6HBkL9OkPhlHe92THtfIhakYG85I
+    &q=@Model.Adress" allowfullscreen></iframe>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            <a href="tel:@Html.DisplayFor(model => model.Phone)">@Html.DisplayFor(model => model.Phone)</a>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            <a href="mailto:@Html.DisplayFor(model => model.ContactEmail)">@Html.DisplayFor(model => model.ContactEmail)</a>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.www)
+        </dt>
+
+        <dd>
+            <a href="@Model.www">@Html.DisplayFor(model => model.www)</a>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Trade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trade)
+        </dd>
+        <br />
+        <dt>
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Pliki
+                    </th>
+                    @if (User.IsInRole("Wystawca") && Model.Email == User.Identity.Name)
+                {
+                    <th>
+                        @Html.ActionLink("Dodaj Plik", "Add", "Files")
+                    </th>
+            }
+                </tr>
+                @foreach (var item in Model.Files)
+            {
+                <tr>
+                    <td>
+                        <a href="~/Images/Company/Files/@item.File">@item.Name</a>
+                    </td>
+                    @if (User.IsInRole("Wystawca") && Model.Email == User.Identity.Name)
+                {
+                    <td>
+                        @Html.ActionLink("Usuń", "Delete", "Files", new { id = item.ID })
+                    </td>
+            }
+                </tr>
+        }
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Administrator"))
+    { <b></b>@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <b>|</b>
+    @Html.ActionLink("Back to List", "Index") <b></b>}
+    @if (User.IsInRole("Wystawca") && Model.Email == User.Identity.Name)
+    { <b></b>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })    <b>|</b>
+    @Html.ActionLink("Wróć", "Index", "Home")<b></b>
+    }
+    @if (User.IsInRole("Organizator"))
+    { <b></b> @Html.ActionLink("Wróć", "Index", "Home")<b></b>
+    }
+    @if (User.IsInRole("Wystawca") && Model.Email != User.Identity.Name)
+    { <b></b> @Html.ActionLink("Wróć", null, null, null, new { href = Request.UrlReferrer })<b></b>
+    }
+    @if (User.IsInRole("User") && Model.Email != User.Identity.Name)
+    { <b></b> @Html.ActionLink("Wróć", null, null, null, new { href = Request.UrlReferrer })<b></b>
+    }
+</p>

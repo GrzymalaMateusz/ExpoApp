@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Usuń konto";
+}
+
+<h2>Usuń</h2>
+<h3>Czy na pewno chcesz usunąć konto?</h3>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Wróć", "Index")
+        </div>
+    }

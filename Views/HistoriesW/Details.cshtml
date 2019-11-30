@@ -1,0 +1,41 @@
+﻿@model Inzynierka.Models.HistoryW
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<h2>Szczegóły wyszukiwania</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Expo.Name_Expo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expo.Name_Expo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Search)
+        </dt>
+
+        <dd>
+            @Html.Raw(@Model.Search)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Wróć do listy", "List", new { id = Model.Expo.Id })
+</p>

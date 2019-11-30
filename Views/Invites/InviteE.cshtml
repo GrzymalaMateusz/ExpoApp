@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Inzynierka.Models.Invite>
+
+@{
+    ViewBag.Title = "Zaproszenia";
+}
+
+<h2>Zaproszenia</h2>
+
+<p>
+    @Html.ActionLink("Zaproś", "Create", new { id = ViewBag.ExpoId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @if (item.Status == Inzynierka.Models.status.invite)
+    {
+        <span>Wysłano Zaproszenie</span>
+}
+else if (item.Status == Inzynierka.Models.status.send)
+{
+        <span>Prośba o dodanie</span>
+}
+else if (item.Status == Inzynierka.Models.status.approved)
+{
+        <span>Dodano</span>
+}
+else if (item.Status == Inzynierka.Models.status.canceled)
+{
+        <span>Odrzucono/Anulowano</span>
+}
+        </td>
+        <td>
+            @if (item.Status == Inzynierka.Models.status.send)
+            {
+                @Html.ActionLink("Zatwierdź", "approve", new { id = item.Id })
+            }
+            @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Inzynierka.Models.Expo>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name_Expo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpoStartData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpoEndData)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name_Expo, "Details", "Expoes", new { id = item.Id }, new { })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpoStartData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpoEndData)
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

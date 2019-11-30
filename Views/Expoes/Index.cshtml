@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<Inzynierka.Models.Expo>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Targi";
+}
+
+<h2>Targi</h2>
+
+<p>
+    @if (User.IsInRole("Administrator"))
+    {@Html.ActionLink("Dodaj Targi", "CreateE")}
+</p>
+@using (Html.BeginForm("Index", "Expoes", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nazwa Targów", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Adres
+        </th>
+        <th>
+            Krótki Opis
+        </th>
+        <th>
+            @Html.ActionLink("Data Rozpoczęcia Targów", "Index", new { sortOrder = ViewBag.StartData, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Data Zakończenia Targów", "Index", new { sortOrder = ViewBag.EndData, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name_Expo, "Details", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpoStartData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpoEndData)
+        </td>
+        <td>
+            @if (User.IsInRole("User"))
+    {<b>
+            @if (!item.Users.Any(p => p.Email == User.Identity.Name))
+    {@Html.ActionLink("Dołącz", "Join", new { id = item.Id })}
+        </b>}
+            @if (User.IsInRole("Wystawca"))
+    {<b>
+    @if (!item.Company.Any(p => p.Email == User.Identity.Name))
+    {
+        @Html.ActionLink("Wyślij zapytanie", "send", "Invites", new { id = item.Id }, null)
+    }
+</b>}
+            @if (User.IsInRole("Administrator"))
+    {<b></b>@Html.ActionLink("Uczestnicy", "List", "Users", new { id = item.Id }, null)}
+            @if (User.IsInRole("Administrator"))
+    {<b>| </b>@Html.ActionLink("Wystawcy", "List", "Companies", new { id = item.Id }, null)}
+            @if (User.IsInRole("Administrator"))
+    {<b>| </b>@Html.ActionLink("Edytuj", "Edit", new { id = item.Id })}
+            @if (User.IsInRole("Administrator"))
+    {<b>| </b>@Html.ActionLink("Usuń", "Delete", new { id = item.Id })}
+            @if (User.IsInRole("Administrator"))
+    {<b>| </b>@Html.ActionLink("Zaproszenia", "InviteE","Invites", new { id = item.Id },null)}
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

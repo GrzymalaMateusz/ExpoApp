@@ -1,0 +1,185 @@
+﻿@using Inzynierka.Models
+@model Inzynierka.Models.Expo
+
+@{
+    ViewBag.Title = "Sczegóły";
+}
+
+<h2>@Html.DisplayFor(model => model.Name_Expo)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        @if (Model.Photo != null)
+    {
+        <dt>
+
+        </dt>
+
+        <dd>
+            <img src="~/Images/Expo/@Model.Photo" alt="Zdj" height="100%" width="100%" />
+        </dd>
+        <br />
+}
+        @if (Model.MapPhoto != null)
+    {
+        <dt>
+            Mapa Targów
+        </dt>
+
+        <dd>
+            <a href="~/Images/Expo/@Model.MapPhoto"><img src="~/Images/Expo/@Model.MapPhoto" alt="Zdj" height="100%" width="100%" /></a>
+        </dd>
+        <br />
+}
+        @if (User.IsInRole("Administrator"))
+    {
+        if (Model.pdflayout != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.pdflayout)
+            </dt>
+
+            <dd>
+                <img src="~/Images/Expo/pdf/@Model.pdflayout" alt="Zdj" height="100%" width="100%" />
+            </dd>
+            <br />
+    }
+}
+        @if (Model.Adres != null)
+    {
+        <dt>
+            @Html.DisplayNameFor(model => model.Adres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adres)
+        </dd>
+        <br />
+
+        <dt>
+            Mapa
+        </dt>
+
+        <dd>
+            <iframe width="100%"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    src="" allowfullscreen></iframe>
+        </dd>
+        <br />
+}
+        @if (Model.Description != null)
+    {
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <br />
+}
+        @if (Model.ExpoStartData != null)
+    {
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpoStartData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpoStartData)
+        </dd>
+        <br />
+}
+        @if (Model.ExpoEndData != null)
+    {
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpoEndData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpoEndData)
+        </dd>
+        <br />
+}
+        @if (Model.Company.Count != 0)
+    {
+        <dt>
+            Wystawcy
+        </dt>
+        <dd>
+            @Html.ActionLink("Lista Wystawców", "List", "Companies", new { id = Model.Id }, null)}
+        </dd>
+}
+        <dt>
+            Wydarzenia
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Data Rozpoczęcia
+                    </th>
+                    <th>
+                        Data Zakończenia
+                    </th>
+                    <th>
+                        Nazwa
+                    </th>
+                    <th>
+                        Miejsce
+                    </th>
+                    <th>
+                        @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Dodaj", "Create", "Events", new { id = Model.Id }, new { })
+                }
+                        @if (User.IsInRole("Organizator"))
+                    {
+                        @Html.ActionLink("Dodaj", "Create", "Events", new { id = Model.Id }, new { })
+                }
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Events)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Place)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Edytuj", "Edit", "Events", new { id = item.Id }, new { })<span> | </span>
+                        @Html.ActionLink("Usuń", "Delete", "Events", new { id = item.Id }, new { })
+                }
+                        @if (User.IsInRole("Organizator"))
+                    {
+                        @Html.ActionLink("Edytuj", "Edit", "Events", new { id = item.Id }, new { })<span> | </span>
+                        @Html.ActionLink("Usuń", "Delete", "Events", new { id = item.Id }, new { })
+                }
+                    </td>
+                </tr>
+        }
+
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Administrator"))
+    {@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })<b> |</b>}
+    @Html.ActionLink("Wróc do listy", "Index")
+</p>

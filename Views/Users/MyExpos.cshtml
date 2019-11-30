@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Inzynierka.Models.Expo>
+
+@{
+    ViewBag.Title = "Moje Targi";
+}
+
+<h2>Moje Targi</h2>
+
+<p>
+    @Html.ActionLink("Dodaj", "Index","Expoes")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name_Expo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpoStartData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpoEndData)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name_Expo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpoStartData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpoEndData)
+        </td>
+        <td>
+            @Html.ActionLink("Historia", "MyHistory", "Users",new { ids= item.Id },null)<b> |</b>
+            @Html.ActionLink("Kod QR", "Index", "PDF", new { layout = item.pdflayout }, new { target = "_blank" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,72 @@
+﻿@model Inzynierka.Models.Expo
+
+@{
+    ViewBag.Title = "Usuń";
+}
+
+<h2>Usuń</h2>
+
+<h3>Czy na pewno chcesz usunąć te targi?</h3>
+<div>
+    <h4>Expo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Expo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Expo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpoStartData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpoStartData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpoEndData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpoEndData)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Wróć do listy", "Index")
+        </div>
+    }
+</div>

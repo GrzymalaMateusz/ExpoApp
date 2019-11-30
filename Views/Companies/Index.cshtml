@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Inzynierka.Models.Company>
+
+@{
+    ViewBag.Title = "Lista Wystawców";
+}
+
+<h2>Lista Wystawców</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NIP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForName_And_SurName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPhone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForName_And_SurName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPhone)
+        </td>
+        <td>
+            @if (User.IsInRole("Administrator"))
+            {@Html.ActionLink("Edytuj", "Edit", new { id = item.Id })}
+            @if (User.IsInRole("Administrator")|| User.IsInRole("Organizator"))
+            {<b>|</b>@Html.ActionLink("Szczegóły", "Details", new { id = item.Id })}
+            @if (User.IsInRole("Administrator"))
+            {<b>|</b>@Html.ActionLink("Usuń", "Delete", new { id = item.Id })}
+        </td>
+    </tr>
+}
+
+</table>

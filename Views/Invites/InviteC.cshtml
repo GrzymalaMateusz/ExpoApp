@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Inzynierka.Models.Invite>
+
+@{
+    ViewBag.Title = "Zaproszenia i Prośby";
+}
+
+<h2>Zaproszenia i Prośby</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expo.Name_Expo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @if (item.Status == Inzynierka.Models.status.invite)
+    {
+        <span>Zaproszenie</span>
+}
+else if (item.Status == Inzynierka.Models.status.send)
+{
+        <span>Prośba</span>
+}
+else if (item.Status == Inzynierka.Models.status.approved)
+{
+        <span>Dodano</span>
+}
+else if (item.Status == Inzynierka.Models.status.canceled)
+{
+        <span>Odrzucono/Anulowano</span>
+}
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expo.Name_Expo)
+        </td>
+        <td>
+            @if (item.Status == Inzynierka.Models.status.send)
+    {
+        @Html.ActionLink("Usuń", "canceled", "Invites", new { id = item.Id }, new { })
+}
+            @if (item.Status == Inzynierka.Models.status.invite)
+    {
+        @Html.ActionLink("Zaakceptuj", "approveT", "Invites", new { id = item.Id }, new { })<span> | </span>
+        @Html.ActionLink("Usuń", "canceledT", "Invites", new { id = item.Id }, new { })
+}
+        </td>
+    </tr>
+}
+
+</table>
